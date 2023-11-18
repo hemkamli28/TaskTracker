@@ -1,0 +1,47 @@
+
+###Get Users
+ GET http://localhost:5000/user/all
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdHVzZXIxIiwiaWF0IjoxNjk5OTcwMzk3fQ.8V8eQhAyysYWN086_i6ws7VoDmlbOWRhkrW-waXIx9s
+
+###Get Tasks
+ GET http://localhost:5000/task/all
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDI2OTI4fQ.duA3NCzTNnpy5pWTz2VZ-X7OpAnBl60ePoCUM8f6kXQ
+###Register User
+POST http://localhost:5000/user/add HTTP/1.1
+content-type: application/json
+
+{
+    "username": "testuser2",
+    "password": "test@002"
+}
+
+###Login User
+POST http://localhost:5000/user/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "testuser1",
+    "password": "test@001"
+}
+
+
+###Add or create a new task
+POST http://localhost:5000/task/add HTTP/1.1
+content-type: application/json
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjIifSwiaWF0IjoxNzAwMDI2ODkzLCJleHAiOjE3MDAwMjcwMTN9.gfDNxPVpciMTebms-hkLR-XHt6XSEnuHIXeM31Boq-g
+
+{
+    "title": "user2 task2s sad",
+    "description": "COmplete API intergration for Task Management Project"
+}
+
+###Delete Task
+DELETE  http://localhost:5000/task/65545a03c8d9f1c623210a15 HTTP/1.1
+content-type: application/json
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDMwMjg3fQ.CHTWlltalBSX2iL5EqDZJdXA4TTLQcEQed3V0VDP-VM
+
+
+### update task status
+PUT  http://localhost:5000/task/655459fac8d9f1c623210a13 HTTP/1.1
+content-type: application/json
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDMxOTY5fQ.MH44crxL4s62lYtp9jrsI1gtx961NlybSdCzeXG1CWg
