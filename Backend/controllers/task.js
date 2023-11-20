@@ -3,7 +3,6 @@ const Task = require("../models/task");
 
 const getTasks = async (req, res) => {
     try {
-        console.log(req.user.name);
         const tasks = await Task.find({user: req.user.name});
         
         res.status(200).json({ tasks , success: true, message: 'Task'});
@@ -15,7 +14,6 @@ const getTasks = async (req, res) => {
 }
 const addTask = async( req, res) =>{
     try {
-        console.log('User Name:', req.user.name);
         const { title, description, status, due} = req.body;
         const user = req.user.name;
         const task = new Task({title, description, status, due, user});

@@ -6,13 +6,16 @@
 ###Get Tasks
  GET http://localhost:5000/task/all
  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDI2OTI4fQ.duA3NCzTNnpy5pWTz2VZ-X7OpAnBl60ePoCUM8f6kXQ
+
+
 ###Register User
 POST http://localhost:5000/user/add HTTP/1.1
 content-type: application/json
 
 {
-    "username": "testuser2",
-    "password": "test@002"
+    "username": "hemk425",
+    "email":"hemkamli425@gmail.com",
+    "password": "hem@2810"
 }
 
 ###Login User
@@ -20,15 +23,45 @@ POST http://localhost:5000/user/login HTTP/1.1
 content-type: application/json
 
 {
-    "username": "testuser1",
-    "password": "test@001"
+    "email": "hemkamli425@gmail.com",
+    "password": "Hem@28102002"
+}
+
+###Verify User update
+GET http://localhost:5000/user/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rMkBnbWFpbC5jb20ifSwiaWF0IjoxNzAwMzgyMTk0LCJleHAiOjE3MDAzODIzMTR9.HkOZ_cb-SfgUoeK_tpcj8D2VhiVjMco5aIBQH1RQjLg HTTP/1.1
+content-type: application/json
+
+###send OTP
+POST http://localhost:5000/user/send-otp HTTP/1.1
+content-type: application/json
+
+{
+    "email": "hemkamli425@gmail.com"
+}
+
+###Compare OTP
+POST http://localhost:5000/user/check-otp HTTP/1.1
+content-type: application/json
+
+{
+    "inputOtp": "4728"
+}
+
+
+###Reset Password
+PUT http://localhost:5000/user/reset-password HTTP/1.1
+content-type: application/json
+
+{
+    "email": "hemkamli425@gmail.com",
+    "password": "Hem@28102002"
 }
 
 
 ###Add or create a new task
 POST http://localhost:5000/task/add HTTP/1.1
 content-type: application/json
- Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjIifSwiaWF0IjoxNzAwMDI2ODkzLCJleHAiOjE3MDAwMjcwMTN9.gfDNxPVpciMTebms-hkLR-XHt6XSEnuHIXeM31Boq-g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwMzIwMDQ5LCJleHAiOjE3MDAzMjAxNjl9.HBxu8bIMEsvypu6hF38WSS0EwmcMZemOOzdBIW8P7Mk
 
 {
     "title": "user2 task2s sad",
@@ -44,4 +77,4 @@ content-type: application/json
 ### update task status
 PUT  http://localhost:5000/task/655459fac8d9f1c623210a13 HTTP/1.1
 content-type: application/json
- Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDMxOTY5fQ.MH44crxL4s62lYtp9jrsI1gtx961NlybSdCzeXG1CWg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDMxOTY5fQ.MH44crxL4s62lYtp9jrsI1gtx961NlybSdCzeXG1CWg
