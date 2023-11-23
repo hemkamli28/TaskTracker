@@ -21,9 +21,10 @@ const getUsers = async (req, res) => {
 
 const addUser = async (req, res) => {
     const { username, email, password } = req.body;
-
+    
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(password, salt, async (err, hashedPassword) => {
+
             const user = new User({ username, email, password: hashedPassword });
             const data = {
                 user: {
@@ -31,17 +32,22 @@ const addUser = async (req, res) => {
                 }
             }
             try {
-                const token = jwt.sign(data, process.env.SECRET, { expiresIn: '1m' })
+                const token = jwt.sign(data, process.env.SECRET, { expiresIn: '5m' })
+                const existingUser = await User.find({ email })
+                if (existingUser.length > 0) {
+                    return res.status(409).json({ success: false, message: "User already exist!" });
+                }
                 await user.save();
-
-                const verificationLink = `http://localhost:5000/user/verify/${token}`
-                sendVerificationEmail(user.email, verificationLink);
+                const verificationLink = `${process.env.CLIENTURL}/user/verify/${token}`
+                const emailData = "Please click the following link to verify your email:"
+                const emailSubject = "Email Verification"
+                sendEmail(user.email, verificationLink, emailData, emailSubject);
 
                 return res.status(200).json({ verificationLink, user, token, success: true, message: "Users Crerated successfully!" });
             }
 
             catch (err) {
-                return res.status(500).json({ error: err.message, success: false, message: "User Failed to create!" });
+                return res.status(500).json({ error: err, success: false, message: "User Failed to create!" });
             }
         });
     });
@@ -65,17 +71,17 @@ const loginUser = async (req, res) => {
                     name: user.email,
                 }
             }
-            const token = jwt.sign(data, process.env.SECRET);
-
+            const token = jwt.sign(data, process.env.SECRET, { expiresIn: '2m' });
+            const refreshToken = jwt.sign(data, process.env.REFRESH_SECRET, { expiresIn: '5m' })
             if (!user.verified) {
-                const verificationLink = `http://localhost:5000/user/verify/${token}`
+                const verificationLink = `${process.env.CLIENTURL}/user/verify/${token}`
                 const emailData = "Please click the following link to verify your email:"
                 const emailSubject = "Email Verification"
-                sendEmail(user.email, verificationLink, emailData, emailSubject);
-                return res.status(200).json({ success: true, token, verificationLink });
+                // sendEmail(user.email, verificationLink, emailData, emailSubject);
+                return res.status(200).json({ success: true, token, refreshToken, verificationLink });
             }
             else {
-                return res.status(200).json({ success: true, token });
+                return res.status(200).json({ success: true, token, refreshToken });
             }
         }
     } catch (error) {
@@ -83,7 +89,22 @@ const loginUser = async (req, res) => {
         return res.status(500).json({ success: false, error: error });
     }
 }
+const newAccessToken = async (req, res) => {
+    try {
+        const user = req.user
+        const data = {
+            user: {
+                name: user.email,
+            }
+        }
+        const accessToken = jwt.sign(data, process.env.SECRET, { expiresIn: '5m' });
+        return res.status(200).json({ accessToken, success: true });
 
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message ,message: "Not generated!" });
+    }
+
+}
 const verifyUser = async (req, res) => {
     try {
         const token = req.params.token;
@@ -190,4 +211,4 @@ const updatePassword = async (req, res) => {
 };
 
 
-module.exports = { getUsers, addUser, loginUser, verifyUser, sendOtp, compareOtp, updatePassword };
+module.exports = { getUsers, addUser, loginUser, verifyUser, sendOtp, compareOtp, updatePassword , newAccessToken};

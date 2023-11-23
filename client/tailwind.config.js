@@ -11,6 +11,10 @@ module.exports = {
         cuorange: {
           500: '#f48c06',
         },
+        
+    },
+    fontFamily: {
+      'noto-serif': ['Noto Serif', 'serif'],
     },
   },
   plugins: [],

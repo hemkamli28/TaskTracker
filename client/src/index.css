@@ -2,4 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Lato:wght@300&family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Lato:wght@300&family=Mulish:wght@500&family=Noto+Serif:wght@600&family=Quicksand&display=swap');
+@layer components {
+    .input-Box {
+      @apply  w-[15em] sm:w-[20rem] pl-3 text-gray-500 font-[500] text-[0.895rem] py-[0.275rem] rounded-sm ring-2 ring-[#9fa4b0] filter drop-shadow-xl focus:outline-none ring-offset-1 focus:ring-offset-[#9b9ea9] focus:font-bold focus:outline-[#9b9ea9] transform ease-in-out delay-100 placeholder:text-gray-400 focus:placeholder:text-white;
+    }
+    .btns{
+      @apply font-[quicksand] uppercase bg-gradient-to-r from-cuorange-500 to-orange-800 hover:from-cuorange-500 hover:to-orange-500 focus:outline-none text-white text-[12px] sm:text-[15px] shadow-md rounded-sm sm:py-3 py-2 sm:px-8 px-4 mt-8 transform active:scale-75 transition-transform
+    }
+    .input-label{
+      @apply text-gray-600 font-[600] text-[1.05rem] py-2
+    }
+  }

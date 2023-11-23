@@ -1,15 +1,13 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
-const authUser = async (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
+const verifyRefreshToken = async (req, res, next) => {
+    const { refreshToken }= req.body;
     try {
-        if (!token) {
-            throw new Error("No token provided");
+        if (!refreshToken) {
+            throw new Error("No refresh-token provided");
         }
-        const data = jwt.verify(token, process.env.SECRET);
+        const data = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
         req.user = data.user;
         next();
         
@@ -24,4 +22,4 @@ const authUser = async (req, res, next) => {
     }
 };
 
-module.exports = {authUser};
+module.exports = {verifyRefreshToken};
