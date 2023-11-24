@@ -22,6 +22,7 @@ const Registration = () => {
     event.preventDefault();
     try {
       const response = await axios.post(`${process.env.REACT_APP_SERVERURL}/user/add`, input);
+      
       if (response.success === false) {
         setAlert(false)
       }

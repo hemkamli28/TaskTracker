@@ -30,8 +30,8 @@ const Login = () => {
       else {
         console.log("Login successfull!");
         setMessage("Login successfull!")
-        setCookie('access_token', response.data.token, { maxAge: 5 * 60 });
-        setCookie('refresh_token', response.data.refreshToken, { maxAge: 15 * 24 * 60 * 60 });
+        setCookie('access_token', response.data.token, { maxAge: 2 * 60 });
+        setCookie('refresh_token', response.data.refreshToken, { maxAge: 10 * 60 });
         navigate("/dashboard")
       };
     }

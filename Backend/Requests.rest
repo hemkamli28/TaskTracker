@@ -5,9 +5,10 @@
 
 ###Get Tasks
  GET http://localhost:5000/task/all
- Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7fSwiaWF0IjoxNzAwNzM5Mjg4LCJleHAiOjE3MDA3Mzk1ODh9.vBN0MrqrBHt4zpqKR_ygt3HywhpnGgBrE3jcnxQ-Bk8
-
-###Register User
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwODM5MDUxLCJleHAiOjE3MDA4MzkxNzF9.XxM89hAfnE_hguSEJvhnex6OVUYKVgTUXkEdM4ysH2w
+ 
+ 
+ ###Register User
 POST http://localhost:5000/user/add HTTP/1.1
 content-type: application/json
 
@@ -31,8 +32,7 @@ POST http://localhost:5000/user/refresh-token HTTP/1.1
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwNzQ5NzMyLCJleHAiOjE3MDA3NTAwMzJ9.-jcPPcYot_p3ZZQ6FbL8473X4cCboWTJxoQ2ajgtzCA"
-}
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwODI5OTYxLCJleHAiOjE3MDA4MzA0NDF9.4vLPGa8Mo7avl__OKf3xtQ3qfijAeveEZtuJfOeKKbc"}
 ###Verify User update
 GET http://localhost:5000/user/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rMkBnbWFpbC5jb20ifSwiaWF0IjoxNzAwMzgyMTk0LCJleHAiOjE3MDAzODIzMTR9.HkOZ_cb-SfgUoeK_tpcj8D2VhiVjMco5aIBQH1RQjLg HTTP/1.1
 content-type: application/json
@@ -67,7 +67,7 @@ content-type: application/json
 ###Add or create a new task
 POST http://localhost:5000/task/add HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7fSwiaWF0IjoxNzAwNzM5Mjg4LCJleHAiOjE3MDA3Mzk1ODh9.vBN0MrqrBHt4zpqKR_ygt3HywhpnGgBrE3jcnxQ-Bk8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwNzU4Mzk5LCJleHAiOjE3MDA3NTg1MTl9.nFLz6FXjmlFvU1eRgqoPyR5dE3TI6tVrOnyxxGJX0T0
 
 {
     "title": "user2 task2s sad",

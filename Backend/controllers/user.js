@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
                 }
             }
             const token = jwt.sign(data, process.env.SECRET, { expiresIn: '2m' });
-            const refreshToken = jwt.sign(data, process.env.REFRESH_SECRET, { expiresIn: '5m' })
+            const refreshToken = jwt.sign(data, process.env.REFRESH_SECRET, { expiresIn: '10m' })
             if (!user.verified) {
                 const verificationLink = `${process.env.CLIENTURL}/user/verify/${token}`
                 const emailData = "Please click the following link to verify your email:"
