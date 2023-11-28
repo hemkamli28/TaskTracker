@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import login from '../images/login.svg';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import axios from 'axios';
 const Login = () => {
   const [cookies, setCookie] = useCookies(['access_token', 'refresh_token']);
@@ -11,11 +13,16 @@ const Login = () => {
     "password": "",
   }
   const [input, setInput] = useState(initialValues)
-  const [message, setMessage] = useState("")
-
+  const [message, setMessage] = useState("");
+  const [eye, setEye] = useState(false);
+  const [color, setColor] = useState("hidden")
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value })
+  }
+
+  const togglePassword = () =>{
+    setEye(!eye);
   }
 
   const handleSubmit = async (e) => {
@@ -25,19 +32,24 @@ const Login = () => {
       console.log(response);
       if (response.data.verificationLink) {
         console.log("Please verify your email to continue");
-        setMessage("Email Verification Pending - Check Your Inbox")
+        setMessage("Email Verification Pending - Check Your Inbox");
+        setColor("red")
       }
       else {
-        console.log("Login successfull!");
         setMessage("Login successfull!")
-        setCookie('access_token', response.data.token, { maxAge: 2 * 60 });
-        setCookie('refresh_token', response.data.refreshToken, { maxAge: 10 * 60 });
-        navigate("/dashboard")
+        setColor("green")
+        setCookie('access_token', response.data.token, { maxAge: 15 * 60 });
+        setCookie('refresh_token', response.data.refreshToken, { maxAge: 15 * 24 * 60 * 60 });
+        console.log("Login successfull!");
+        setTimeout(() => {
+          navigate("/user/dashboard");
+        }, 2000);
       };
     }
     catch (error) {
       console.log("Invalid Credentials!");
-      setMessage("Please provide a valid email address and password")
+      setColor("red");
+      setMessage("Please provide a valid email address and password");
       console.log(error)
     }
   }
@@ -60,10 +72,17 @@ const Login = () => {
               </div>
               <div className='flex flex-col '>
                 <label className='input-label'>Password:</label>
-                <input type="text" className='input-Box' placeholder='Enter Password' name='password' value={input.password} onChange={handleChange} />
+                <div className="relative w-full">
+                  <span className="flex items-center absolute h-full top-0 right-0 z-10">
+                    <p className="text-gray-700 pr-2 ">{!eye ? <FaEye className='hover:cursor-pointer' onClick={togglePassword}/> : <FaEyeSlash className='hover:cursor-pointer' onClick={togglePassword} />}</p>
+                  </span>
+                  <input type={`${eye ? 'text' : 'password'}`} placeholder='Enter Password' name='password' value={input.password} onChange={handleChange} className="input-box block  w-[15em] sm:w-[20rem] pl-3 text-gray-500 font-[500] text-[0.895rem] py-[0.275rem] rounded-sm ring-2 ring-[#9fa4b0] filter drop-shadow-xl focus:outline-none ring-offset-1 focus:ring-offset-[#9b9ea9] focus:font-bold focus:outline-[#9b9ea9] transform ease-in-out delay-100 placeholder:text-gray-400 focus:placeholder:text-white" />
+                </div>
               </div>
-              <div className={`${message.length < 1 && 'hidden'}  px-6 mt-4 py-2 bg-red-50 rounded-sm text-red-500 ring-1 ring-red-500`}>
-                <p className='text-[13px]'>{message}</p>
+
+
+              <div className={`${message.length < 1 && 'hidden'} ${color === "red" ? "bg-red-50 text-red-500 ring-red-500" : 'bg-green-50 text-green-500 ring-green-500"'} md:px-6 px-2 mt-4 py-2 bg-green-50 rounded-sm ring-1 `}>
+                <p className='md:text-[13px] text-[10px]'>{message}</p>
               </div>
               <div className="m-3 flex justify-center items-center">
                 <button type="button" className='btns mt-4' onClick={handleSubmit}>

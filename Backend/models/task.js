@@ -1,31 +1,30 @@
 const mongoose = require('mongoose');
 
 const TaskSchema = new mongoose.Schema({
-    user:{
+    user: {
         type: mongoose.Schema.Types.String,
         ref: 'user'
     },
-    title:{
+    title: {
         type: String,
         required: true
     },
-    description:{
+    description: {
         type: String,
         required: true
     },
-    status:{
+    status: {
         type: Boolean,
         default: false
     },
-    date:{
+    date: {
         type: Date,
         default: Date.now
     },
-    due:{
-        type: Date,
-        default: () => Date.now() + 24 * 60 * 60 * 1000 //24hrs in milliseconds
+    due: { 
+        type: Date, 
+        required: true
     },
-
 });
 
-module.exports = mongoose.model('task',TaskSchema);
+module.exports = mongoose.model('task', TaskSchema);

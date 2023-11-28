@@ -13,4 +13,7 @@
     .input-label{
       @apply text-gray-600 font-[600] text-[1.05rem] py-2
     }
+    .form-errors{
+      @apply text-red-500 text-sm pt-1 max-w-[20rem] font-bold
+    }
   }

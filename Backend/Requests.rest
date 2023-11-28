@@ -1,22 +1,26 @@
 
 ###Get Users
  GET http://localhost:5000/user/all
- Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdHVzZXIxIiwiaWF0IjoxNjk5OTcwMzk3fQ.8V8eQhAyysYWN086_i6ws7VoDmlbOWRhkrW-waXIx9s
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7fSwiaWF0IjoxNzAwOTg0NTY4LCJleHAiOjE3MDA5ODQ4Njh9.lGQ50oUTLtVmOnmYFe1W-gs-iXp5q0WvRympmPEJApU
 
 ###Get Tasks
- GET http://localhost:5000/task/all
- Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwODM5MDUxLCJleHAiOjE3MDA4MzkxNzF9.XxM89hAfnE_hguSEJvhnex6OVUYKVgTUXkEdM4ysH2w
- 
- 
- ###Register User
+ GET http://localhost:5000/task/today
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW00MjVAZ21haWwuY29tIn0sImlhdCI6MTcwMDk4NDg4MCwiZXhwIjoxNzAwOTg1MTgwfQ.5zv1Iw5uZ3T9GgLAdCsxQ5NK6KOdLJeT9IgGTK8-at0
+
+###Get completed/incompleted Tasks 
+ GET http://localhost:5000/task/tasks
+ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwOTkyMzk5LCJleHAiOjE3MDA5OTI5OTl9.9kC991j6MRBzvqZuT3gHxA8VLJs01dVh283eRwraI9o
+###Register User
 POST http://localhost:5000/user/add HTTP/1.1
 content-type: application/json
 
 {
     "username": "hemk425",
-    "email":"hem1kaami425@gmail.com",
+    "email": "hem425@gmail.com",
     "password": "hem@2810"
 }
+
+
 
 ###Login User
 POST http://localhost:5000/user/login HTTP/1.1
@@ -32,10 +36,15 @@ POST http://localhost:5000/user/refresh-token HTTP/1.1
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwODI5OTYxLCJleHAiOjE3MDA4MzA0NDF9.4vLPGa8Mo7avl__OKf3xtQ3qfijAeveEZtuJfOeKKbc"}
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAxMDk3MTY3LCJleHAiOjE3MDEwOTgzNjd9.hFsmFHGW2N7TaxuBucwZqxyqKE9n2RYVx_Q6du9xmxc"
+}
+
+
 ###Verify User update
 GET http://localhost:5000/user/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rMkBnbWFpbC5jb20ifSwiaWF0IjoxNzAwMzgyMTk0LCJleHAiOjE3MDAzODIzMTR9.HkOZ_cb-SfgUoeK_tpcj8D2VhiVjMco5aIBQH1RQjLg HTTP/1.1
 content-type: application/json
+
+
 
 ###send OTP
 POST http://localhost:5000/user/send-otp HTTP/1.1
@@ -67,20 +76,21 @@ content-type: application/json
 ###Add or create a new task
 POST http://localhost:5000/task/add HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAwNzU4Mzk5LCJleHAiOjE3MDA3NTg1MTl9.nFLz6FXjmlFvU1eRgqoPyR5dE3TI6tVrOnyxxGJX0T0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAxMTU1OTMxLCJleHAiOjE3MDExNTYyMzF9.vP-vN04KT5afQk_XA_xYR1GucXmI8SFnJefoIPrldBg
 
 {
-    "title": "user2 task2s sad",
-    "description": "COmplete API intergration for Task Management Project"
+    "title": "API integratiom",
+    "description": "COmplete API intergration for Task Management Project",
+    "dueDate": "2023-11-30"
 }
 
 ###Delete Task
 DELETE  http://localhost:5000/task/65545a03c8d9f1c623210a15 HTTP/1.1
 content-type: application/json
- Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDMwMjg3fQ.CHTWlltalBSX2iL5EqDZJdXA4TTLQcEQed3V0VDP-VM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDMwMjg3fQ.CHTWlltalBSX2iL5EqDZJdXA4TTLQcEQed3V0VDP-VM
 
 
 ### update task status
-PUT  http://localhost:5000/task/655459fac8d9f1c623210a13 HTTP/1.1
+PUT  http://localhost:5000/task/status/6563159ce984b9a02329d599 HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJ0ZXN0dXNlcjEifSwiaWF0IjoxNzAwMDMxOTY5fQ.MH44crxL4s62lYtp9jrsI1gtx961NlybSdCzeXG1CWg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJoZW1rYW1saTQyNUBnbWFpbC5jb20ifSwiaWF0IjoxNzAxMTAwMjk3LCJleHAiOjE3MDExMDAzNTd9.KfTh9-5USWT-j3I4D4Hx0R_Sep9eiCv-fRxEWo_tDSk

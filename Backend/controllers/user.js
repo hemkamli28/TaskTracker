@@ -71,8 +71,8 @@ const loginUser = async (req, res) => {
                     name: user.email,
                 }
             }
-            const token = jwt.sign(data, process.env.SECRET, { expiresIn: '2m' });
-            const refreshToken = jwt.sign(data, process.env.REFRESH_SECRET, { expiresIn: '10m' })
+            const token = jwt.sign(data, process.env.SECRET, { expiresIn: '15m' });
+            const refreshToken = jwt.sign(data, process.env.REFRESH_SECRET, { expiresIn: '15d' })
             if (!user.verified) {
                 const verificationLink = `${process.env.CLIENTURL}/user/verify/${token}`
                 const emailData = "Please click the following link to verify your email:"
@@ -94,7 +94,7 @@ const newAccessToken = async (req, res) => {
         const user = req.user
         const data = {
             user: {
-                name: user.email,
+                name: user.name,
             }
         }
         const accessToken = jwt.sign(data, process.env.SECRET, { expiresIn: '5m' });
