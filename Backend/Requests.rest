@@ -23,7 +23,7 @@ content-type: application/json
 
 
 ###Login User
-POST http://localhost:5000/user/login HTTP/1.1
+POST http://13.200.251.232//user/login HTTP/1.1
 content-type: application/json
 
 {
