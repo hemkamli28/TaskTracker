@@ -1,11 +1,11 @@
 
+require('dotenv').config()
 const express = require("express");
 const User = require("../models/user");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const otpGenerator = require('otp-generator');
-require('dotenv').config()
 
 
 const getUsers = async (req, res) => {
